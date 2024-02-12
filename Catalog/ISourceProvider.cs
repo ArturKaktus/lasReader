@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lasReader.Catalog
+﻿namespace lasReader.Catalog
 {
     public interface ISourceProvider
     {

@@ -1,7 +1,6 @@
 ﻿using lasReader.Catalog;
-using System.Collections.Generic;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace lasReader
@@ -12,8 +11,6 @@ namespace lasReader
 
         private static ISourceProvider[] GetSourceProviders()
         {
-            //var sourceProviderTypes = Assembly.GetExecutingAssembly().GetTypes()
-            //    .Where(t => typeof(ISourceProvider).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
             var assembly = Assembly.GetExecutingAssembly();
             var types = assembly.GetTypes();
             List<ISourceProvider> sourceProviderTypes = new List<ISourceProvider>();
