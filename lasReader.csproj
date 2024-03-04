@@ -51,7 +51,15 @@
     <Compile Include="Catalog\Providers\LasFileReader.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Features\FeatureModels\BaseData.cs" />
+    <Compile Include="Features\FeatureModels\CurveData.cs" />
+    <Compile Include="Features\FeatureModels\IFeatureData.cs" />
+    <Compile Include="Features\FeatureModels\OtherData.cs" />
+    <Compile Include="Features\FeatureModels\ParameterData.cs" />
+    <Compile Include="Features\FeatureModels\VersionData.cs" />
+    <Compile Include="Features\FeatureModels\WellData.cs" />
     <Compile Include="Features\IFeature.cs" />
+    <Compile Include="Features\IWell.cs" />
     <Compile Include="Features\Well.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

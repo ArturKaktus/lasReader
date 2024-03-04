@@ -22,24 +22,25 @@ namespace lasReader
 
         private void MenuOpenFile_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
+            Document.Open();
+        }
+
+        private void Grid_pictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            Graphics g = Grid_pictureBox.CreateGraphics();
+            Pen pen = new Pen(Color.Black);
+
+            int cellWidth = 20;
+            int cellHeight = 20;
+
+            for (int x = 0; x < Grid_pictureBox.Width; x += cellWidth)
             {
-                openFileDialog1.Filter = "Все файлы|*.*";
+                g.DrawLine(pen, x, 0, x, Grid_pictureBox.Height);
+            }
 
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    string selectedFileName = openFileDialog1.FileName;
-                    var datasets = Factory.SourceProvidersFactory;
-
-                    foreach (var dataset in datasets)
-                    {
-                        if (dataset.CanOpen(selectedFileName))
-                        {
-                            dataset.Open(selectedFileName);
-                            break;
-                        }
-                    }
-                }
+            for (int y = 0; y < Grid_pictureBox.Height; y += cellHeight)
+            {
+                g.DrawLine(pen, 0, y, Grid_pictureBox.Width, y);
             }
         }
     }

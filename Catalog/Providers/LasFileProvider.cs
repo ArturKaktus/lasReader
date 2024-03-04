@@ -1,4 +1,7 @@
-﻿namespace lasReader.Catalog.Providers
+﻿using lasReader.Features;
+using System.IO;
+
+namespace lasReader.Catalog.Providers
 {
     public class LasFileProvider : ISourceProvider
     {
@@ -9,8 +12,9 @@
 
         public void Open(string path)
         {
-            var lfr = new LasFileReader(path);
-            //дальнейшая работа с полученными данными
+            Document.Clear();
+            Document.Feature = new Well();
+            new LasFileReader(path);
         }
     }
 }

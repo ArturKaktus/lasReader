@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lasReader.Features;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace lasReader.Catalog.Providers
         private const string CLAUSE_WELL_SHORT = "W";
         private const string CLAUSE_CURVE = "CURVE";
         private const string CLAUSE_CURVE_SHORT = "C";
+        private const string CLAUSE_PARAMETR = "PARAMETR";
         private const string CLAUSE_PARAMETER = "PARAMETER";
         private const string CLAUSE_PARAMETER_SHORT = "P";
         private const string CLAUSE_OTHER = "OTHER";
@@ -57,22 +59,31 @@ namespace lasReader.Catalog.Providers
                     {
                         case CLAUSE_VERSION:
                         case CLAUSE_VERSION_SHORT:
-                            ReadProps(str);
+                            var verarr = ReadProps(str);
+                            if (Document.Feature is Well vw)
+                                vw.AddVersion(verarr);
                             break;
 
                         case CLAUSE_WELL:
                         case CLAUSE_WELL_SHORT:
-                            ReadProps(str);
+                            var wellearr = ReadProps(str);
+                            if (Document.Feature is Well ww)
+                                ww.AddWell(wellearr);
                             break;
 
                         case CLAUSE_CURVE:
                         case CLAUSE_CURVE_SHORT:
-                            ReadProps(str);
+                            var curvearr = ReadProps(str);
+                            if (Document.Feature is Well cw)
+                                cw.AddCurve(curvearr);
                             break;
 
                         case CLAUSE_PARAMETER:
+                        case CLAUSE_PARAMETR:
                         case CLAUSE_PARAMETER_SHORT:
-                            ReadProps(str);
+                            var paramarr = ReadProps(str);
+                            if (Document.Feature is Well pw)
+                                pw.AddParameter(paramarr);
                             break;
                     }
                 }
@@ -84,7 +95,7 @@ namespace lasReader.Catalog.Providers
             }
         }
 
-        private void ReadProps(string str)
+        private string[] ReadProps(string str)
         {
             try
             {
@@ -104,8 +115,7 @@ namespace lasReader.Catalog.Providers
                         i++;
                 }
 
-                var trimmedArray = arrayProps.Select(s => string.IsNullOrWhiteSpace(s) ? string.Empty : s.Trim()).ToArray();
-                //return trimmedArray для работы с полученными данными строки
+                return arrayProps.Select(s => string.IsNullOrWhiteSpace(s) ? string.Empty : s.Trim()).ToArray();
             }
             catch (Exception e)
             {

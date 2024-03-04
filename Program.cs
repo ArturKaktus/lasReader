@@ -13,7 +13,11 @@ namespace lasReader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var form = new Form1();
+            Document.MainForm = form;
+
+            Application.Run(form);
+           
         }
     }
 }
